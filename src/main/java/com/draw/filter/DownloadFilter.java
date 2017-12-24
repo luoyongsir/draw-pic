@@ -1,4 +1,3 @@
-
 package com.draw.filter;
 
 import org.apache.commons.lang3.StringUtils;
@@ -18,7 +17,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * 文件下载
+ * 绘制编号图片，并下载
  * @author luoyong
  * @date 2017-12-24
  */
@@ -45,7 +44,7 @@ public class DownloadFilter implements Filter {
 			res.sendError(403);
 			return;
 		}
-		LOG.info("download job number: " + jobNumber);
+		LOG.info("download job number: ", jobNumber);
 		try (OutputStream out = res.getOutputStream()) {
 			res.setContentType("application/x-download");
 			// 设置文件名
@@ -66,10 +65,8 @@ public class DownloadFilter implements Filter {
 	 */
 	private static BufferedImage createImage(String content) {
 		int size = 240;
-		if (StringUtils.isNumeric(content)) {
-			if (content.length() > 2) {
-				size = content.length() * 80;
-			}
+		if (StringUtils.isNumeric(content) && content.length() > 2) {
+			size = content.length() * 80;
 		}
 		Integer width = size;
 		Integer height = size;
