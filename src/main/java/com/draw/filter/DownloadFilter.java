@@ -52,7 +52,6 @@ public class DownloadFilter implements Filter {
 			res.addHeader("Content-Disposition", "attachment;filename=" + jobNumber + ".jpg");
 			BufferedImage bi = createImage(jobNumber);
 			ImageIO.write(bi, "JPG", out);
-			// out.write((byte[]) b);
 			out.flush();
 		} catch (FileNotFoundException e) {
 			LOG.error("生成编号图片出错：", e);
