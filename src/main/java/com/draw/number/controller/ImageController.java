@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.awt.font.FontRenderContext;
@@ -29,8 +28,7 @@ import java.io.OutputStream;
 public class ImageController {
 
 	@GetMapping(path = "/draw/{number}")
-	public void drawImage(@PathVariable Long number, HttpServletRequest request, HttpServletResponse response)
-			throws IOException {
+	public void drawImage(@PathVariable Long number, HttpServletResponse response) throws IOException {
 		log.info("draw job number: ", number);
 		try (OutputStream out = response.getOutputStream()) {
 			response.setContentType("application/x-download");
