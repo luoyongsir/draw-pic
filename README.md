@@ -1,5 +1,5 @@
 # number-pic
 生成数字编号图片
 
-部署在tomcat后
-访问 http://ip:port/download/123
+启动服务后访问 
+http://localhost:8080/image/draw/123
