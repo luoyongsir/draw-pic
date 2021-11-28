@@ -1,4 +1,4 @@
-package com.draw.number.controller;
+package com.draw.pic.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -29,7 +29,7 @@ public class ImageController {
 
 	@GetMapping(path = "/draw/{numberLetters:^[A-Za-z0-9]+$}")
 	public void drawImage(@PathVariable String numberLetters, HttpServletResponse response) throws IOException {
-		log.info("draw numberLetters: ", numberLetters);
+		log.info("draw numberLetters: {}", numberLetters);
 		try (OutputStream out = response.getOutputStream()) {
 			response.setContentType("application/x-download");
 			// 设置文件名

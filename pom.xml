@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.draw</groupId>
-	<artifactId>number-pic</artifactId>
+	<artifactId>draw-pic</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>number-pic</name>
-	<description>draw number pic</description>
+	<name>draw-pic</name>
+	<description>draw numbers or|and letters pic</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
