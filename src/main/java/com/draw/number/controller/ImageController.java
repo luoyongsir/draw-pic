@@ -27,14 +27,14 @@ import java.io.OutputStream;
 @RequestMapping("/image")
 public class ImageController {
 
-	@GetMapping(path = "/draw/{number}")
-	public void drawImage(@PathVariable Long number, HttpServletResponse response) throws IOException {
-		log.info("draw job number: ", number);
+	@GetMapping(path = "/draw/{numberLetters:^[A-Za-z0-9]+$}")
+	public void drawImage(@PathVariable String numberLetters, HttpServletResponse response) throws IOException {
+		log.info("draw numberLetters: ", numberLetters);
 		try (OutputStream out = response.getOutputStream()) {
 			response.setContentType("application/x-download");
 			// 设置文件名
-			response.addHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + number + ".jpg");
-			BufferedImage bi = createImage(String.valueOf(number));
+			response.addHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + numberLetters + ".jpg");
+			BufferedImage bi = createImage(numberLetters);
 			ImageIO.write(bi, "JPG", out);
 		} catch (FileNotFoundException e) {
 			log.error("draw number error：", e);
@@ -45,13 +45,13 @@ public class ImageController {
 
 	/**
 	 * 创建图片
-	 * @param number 内容
+	 * @param numberLetters 只能包含数字、字母
 	 * @return
 	 */
-	private static BufferedImage createImage(String number) {
+	private static BufferedImage createImage(String numberLetters) {
 		int size = 240;
-		if (number.length() > 2) {
-			size = number.length() * 80;
+		if (numberLetters.length() > 2) {
+			size = numberLetters.length() * 80;
 		}
 		Integer width = size;
 		Integer height = size;
@@ -67,7 +67,7 @@ public class ImageController {
 		g2.clearRect(0, 0, width, height);
 		g2.setPaint(new Color(27, 15, 99));
 		FontRenderContext context = g2.getFontRenderContext();
-		Rectangle2D bounds = font.getStringBounds(number, context);
+		Rectangle2D bounds = font.getStringBounds(numberLetters, context);
 
 		//		float x = (float) ((width - bounds.getWidth()) / 2);
 		//		float y = (float) (height / 2 + 45.5);
@@ -78,7 +78,7 @@ public class ImageController {
 		double y = (height - bounds.getHeight()) / 2;
 		double ascent = -bounds.getY();
 		double baseY = y + ascent;
-		g2.drawString(number, (int) x, (height - 92) / 2 + 92);
+		g2.drawString(numberLetters, (int) x, (height - 92) / 2 + 92);
 		return bi;
 	}
 }
